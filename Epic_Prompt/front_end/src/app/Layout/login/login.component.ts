@@ -3,6 +3,7 @@ import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { JogadorController} from '../../Shared/Controllers/jogador.controller'
 import { tap } from 'rxjs';
+import { AuthController } from '../../Shared/Controllers/auth.controller';
 
 
 @Component({
@@ -16,7 +17,8 @@ export class LoginComponent implements OnInit{
 
   constructor(private _formBuilder: FormBuilder,
     private router : Router,
-    private jogadorController : JogadorController,){ }
+    private jogadorController : JogadorController,
+    private authController: AuthController){ }
 
   ngOnInit(): void {
     this.loginForm = this._formBuilder.group({
@@ -37,7 +39,14 @@ export class LoginComponent implements OnInit{
             console.log('Usuário não cadastrado: Retorno do backend é null');
             throw new Error('Retorno do backend é null');
           } else {
-            console.log('Usuário cadastrado com sucesso');
+
+            const { token } = result;
+            this.authController.setToken(token);
+
+            console.log('Token salvo no localStorage:', this.authController.getToken());
+
+            //console.log('Resposta do login:', result);
+            console.log('Usuário logado com sucesso');
             this.loginForm?.reset();
             this.router.navigateByUrl('');
           }
