@@ -1,1 +1,16 @@
+<div *ngIf="mostrarConteudo">
+    <h1 style="padding-left: 45px;">
+      EPIC<img src="../../assets/Images/img1.png" alt="img">PROMPT
+    </h1>
+  
+    <p>
+      Entre nessa jornada RPG <br> onde você controla um herói<br>enfrentando vilões no reino<br>de prompt.
+    </p>
+
+    <div class="alinharBotoes">
+        <button type="submit" [routerLink]="['login']" class="botoes">Entrar</button>
+        <button type="submit" [routerLink]="['cadastrar']" class="botoes">Cadastre-se</button>
+    </div>
+  
+</div>
 <router-outlet></router-outlet>

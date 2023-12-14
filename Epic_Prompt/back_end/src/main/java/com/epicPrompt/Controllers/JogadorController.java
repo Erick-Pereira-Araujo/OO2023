@@ -28,13 +28,14 @@ public class JogadorController {
 		return new ResponseEntity<>(jogadorService.cadastarJogador(jogador), HttpStatus.CREATED);
 	}
 	
-	@RequestMapping(value = "/login", method = RequestMethod.GET)
+	@RequestMapping(value = "/login", method = RequestMethod.POST)
 	public Integer logarJogador(@RequestBody Jogador jogador) {
-		if(jogadorService.verificaLogin(jogador) == null) {
+		Integer jogadorId = jogadorService.verificaLogin(jogador);
+		if(jogadorId == null) {
 			return null;
-		}
+		}else {}
 		
-		return jogador.getId();
+		return jogadorId;
 	}
 
 }

@@ -1,2 +1,37 @@
 /* You can add global styles to this file, and also import other style files */
 @import 'bootstrap/dist/css/bootstrap.min.css';
+
+@font-face {
+    font-family: 'Press Start 2P';
+    src: url('./assets/Fonts/PressStart2P-Regular.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+}
+  
+body {
+  margin: 0;
+  padding: 20px;
+  font-family: 'Press Start 2P', cursive;
+  background-color: #4F80D4;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.botoes {
+  background-color: #e7595d;
+  color: #e6e5e9;
+  padding: 15px 30px;
+  margin: 40px;
+  border: 5px solid #a33c41; /* Adiciona borda para dar o estilo pixel */
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.3); /* Adiciona uma sombra para dar dimensão */
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 16px;
+  font-family: 'Press Start 2P', cursive;
+}
+
+.botoes:hover {
+  background-color: #d64f54;
+}

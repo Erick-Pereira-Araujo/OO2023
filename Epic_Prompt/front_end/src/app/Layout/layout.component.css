@@ -1,0 +1,30 @@
+h1 {
+    color: #F6E083;
+  font-size: 40px;
+  text-align: center;
+  margin-bottom: 100px;
+}
+
+.alinharBotoes{
+  display: flex;
+  align-content: center;
+  justify-content: center;
+}
+
+h1 img {
+  vertical-align: middle;
+  margin: 0 10px;
+}
+
+p {
+  color: #333;
+  margin-bottom: 100px;
+  text-align: center;
+  line-height: 2;
+}
+
+.buttons-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}

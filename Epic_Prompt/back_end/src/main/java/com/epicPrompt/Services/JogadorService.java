@@ -7,6 +7,7 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.epicPrompt.Models.Heroi;
 import com.epicPrompt.Models.Jogador;
 import com.epicPrompt.Repository.JogadorRepository;
 
@@ -30,7 +31,9 @@ public class JogadorService {
 	
     
 	public Jogador cadastarJogador(Jogador jogador) {
-		heroiService.criarHeroi(jogador.getId());
+		Heroi heroi = heroiService.criarHeroi();
+		jogador.setHeroi(heroi);
+		jogador.setLoginStatus(false);
 		return jogadorRepository.save(jogador);
 	}
 	

@@ -1,5 +1,10 @@
 package com.epicPrompt.Models;
 
+import jakarta.persistence.MappedSuperclass;
+
+//MapperdSuperClass serve para avisar ao hibernate essa classe não é uma entidade a ser criada uma tabela
+//mas seus atributos devem ser mapeados para as classes filhas possam ter esses atributos em suas tabelas
+@MappedSuperclass
 public abstract class Personagem {
 	
 	protected Integer nivel;

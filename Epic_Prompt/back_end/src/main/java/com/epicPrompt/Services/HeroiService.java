@@ -12,14 +12,13 @@ public class HeroiService {
 	@Autowired
 	private HeroiRepository heroiRepository;
 	
-	public Heroi criarHeroi(Integer id) {
+	public Heroi criarHeroi() {
 		Heroi heroi = new Heroi();
 		heroi.setAtaque(10);
 		heroi.setDefesa(10);
 		heroi.setNivel(1);
 		heroi.setVida(100);
 		heroi.setBarraXP(100);
-		heroi.setJogadorId(id);
 		
 		return heroiRepository.save(heroi);
 	}

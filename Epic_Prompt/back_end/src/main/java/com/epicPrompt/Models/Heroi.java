@@ -12,16 +12,13 @@ public class Heroi extends Personagem{
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;	
 	
-	private Integer jogadorId;
-	
 	private Integer barraXP;
 	
 	public Heroi() {
 	}
 
-	public Heroi(Integer jogadorId, Integer barraXP) {
+	public Heroi(Integer barraXP) {
 		super();
-		this.jogadorId = jogadorId;
 		this.barraXP = barraXP;
 	}
 
@@ -31,14 +28,6 @@ public class Heroi extends Personagem{
 
 	public void setId(Integer id) {
 		this.id = id;
-	}
-
-	public Integer getJogadorId() {
-		return jogadorId;
-	}
-
-	public void setJogadorId(Integer jogadorId) {
-		this.jogadorId = jogadorId;
 	}
 
 	public Integer getBarraXP() {
