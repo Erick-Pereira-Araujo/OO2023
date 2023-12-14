@@ -1,0 +1,62 @@
+@font-face {
+    font-family: 'Press Start 2P';
+    src: url('../../Shared/Fonts/PressStart2P-Regular.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+  }
+  
+  body {
+    margin: 0;
+    padding: 0;
+    font-family: 'Press Start 2P', cursive;
+    background-color: #4F80D4;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+  }
+  
+  h1 {
+    color: #F6E083;
+    font-size: 40px;
+    text-align: center;
+    margin-bottom: 100px;
+  }
+  
+  h1 img {
+    vertical-align: middle;
+    margin: 0 10px;
+  }
+  
+  p {
+    color: #333;
+    margin-bottom: 100px;
+    text-align: center;
+    line-height: 2;
+  }
+  
+  .buttons-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  .login-button,
+  .register-button {
+    background-color: #e7595d;
+    color: #e6e5e9;
+    padding: 15px 30px;
+    margin: 5px;
+    border: 5px solid #a33c41; /* Adiciona borda para dar o estilo pixel */
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.3); /* Adiciona uma sombra para dar dimensão */
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 16px;
+    font-family: 'Press Start 2P', cursive;
+  }
+  
+  .login-button:hover,
+  .register-button:hover {
+    background-color: #d64f54;
+  }

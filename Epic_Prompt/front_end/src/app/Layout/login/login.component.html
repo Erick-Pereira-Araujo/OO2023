@@ -1,4 +1,17 @@
-<form class="container" [formGroup]="loginForm">
+
+
+
+
+<div class="login-container">
+  <h1>
+    EPIC <img src="../../Shared/Imgs/img1.png" alt="img"> PROMPT
+  </h1>
+
+  <p>
+    Entre nessa jornada RPG <br> onde você controla um herói<br>enfrentando vilões no reino<br>de prompt.
+  </p>
+
+  <form class="container" [formGroup]="loginForm">
     <div class="form-group">
       <label for="nome">Nome</label>
       <input type="text" class="form-control" id="nome" placeholder="Digite o Nome do Jogador" formControlName="nomeJogador">
@@ -9,3 +22,5 @@
     </div>
     <button type="submit" (click)="logar()" class="btn btn-primary">Entrar</button>
 </form>
+</div>
+
