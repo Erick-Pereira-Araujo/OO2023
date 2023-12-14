@@ -15,7 +15,7 @@ import jakarta.persistence.Id;
 import jakarta.persistence.OneToOne;
 
 @Entity
-public class Jogador implements UserDetails{
+public class Jogador {
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -30,23 +30,23 @@ public class Jogador implements UserDetails{
     @OneToOne
     private Heroi heroi;
     
-    private UserRole role;
+    private Boolean loginStatus;
 
 	public Jogador() {
 	}
 	
-	public Jogador(Integer id, String nomeJogador, String senha, Heroi heroi, UserRole role) {
+	public Jogador(Integer id, String nomeJogador, String senha, Heroi heroi, Boolean loginStatus) {
 		this.id = id;
 		this.nomeJogador = nomeJogador;
 		this.senha = senha;
 		this.heroi = heroi;
-		this.role = role;
+		this.loginStatus = loginStatus;
 	}
 	
-	public Jogador(String nomeJogador, String senha, UserRole role) {
+	public Jogador(String nomeJogador, String senha, Boolean loginStatus) {
 		this.nomeJogador = nomeJogador;
 		this.senha = senha;
-		this.role = role;
+		this.loginStatus = loginStatus;
 	}
 
 
@@ -82,54 +82,12 @@ public class Jogador implements UserDetails{
 		this.heroi = heroi;
 	}
 	
-	public UserRole getUserRole() {
-		return role;
+	public Boolean getLoginStatus() {
+		return loginStatus;
 	}
 
-	public void setUserRole(UserRole role) {
-		this.role = role;
-	}
-
-	@Override
-	public Collection<? extends GrantedAuthority> getAuthorities() {
-		// TODO Auto-generated method stub
-		return List.of(new SimpleGrantedAuthority("USER"));
-	}
-
-	@Override
-	public String getPassword() {
-		// TODO Auto-generated method stub
-		return senha;
-	}
-
-	@Override
-	public String getUsername() {
-		// TODO Auto-generated method stub
-		return nomeJogador;
-	}
-
-	@Override
-	public boolean isAccountNonExpired() {
-		// TODO Auto-generated method stub
-		return true;
-	}
-
-	@Override
-	public boolean isAccountNonLocked() {
-		// TODO Auto-generated method stub
-		return true;
-	}
-
-	@Override
-	public boolean isCredentialsNonExpired() {
-		// TODO Auto-generated method stub
-		return true;
-	}
-
-	@Override
-	public boolean isEnabled() {
-		// TODO Auto-generated method stub
-		return true;
+	public void setLoginStatus(Boolean loginStatus) {
+		this.loginStatus = loginStatus;
 	}
 
 }

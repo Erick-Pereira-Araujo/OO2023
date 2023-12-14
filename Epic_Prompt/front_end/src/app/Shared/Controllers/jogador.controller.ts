@@ -15,11 +15,13 @@ export class JogadorController {
   constructor(public http: HttpClient) { }
 
   createJogador(obj: Jogador): Observable<Jogador> {
-    return this.http.post<Jogador>(`${this.urlBase}auth/cadastrar`, obj)
+    return this.http.post<Jogador>(`${this.urlBase}cadastrar`, obj)
   }
 
-  loginJogador(obj: Jogador): Observable<LoginResponse> {
-    return this.http.post<LoginResponse>(`${this.urlBase}auth/login`, obj)
+
+  loginJogador(jogador: Jogador): Observable<number | null> {
+    return this.http.post<number>(`${this.urlBase}login`, jogador);
   }
+  
 
 }

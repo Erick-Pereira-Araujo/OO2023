@@ -11,9 +11,6 @@ import com.epicPrompt.Models.Jogador;
 @Repository
 public interface JogadorRepository extends JpaRepository<Jogador, Integer>{
 	
-	@Query("SELECT j FROM Jogador j WHERE j.nomeJogador = :nomeJogador")
-	Jogador findJogadorByNome(@Param("nomeJogador") String nomeJogador);
-	
-	UserDetails findJogadorBynomeJogador(String nomeJogador);
+	Jogador findJogadorBynomeJogador(String nomeJogador);
 
 }

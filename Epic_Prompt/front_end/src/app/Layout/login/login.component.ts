@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { JogadorController} from '../../Shared/Controllers/jogador.controller'
 import { tap } from 'rxjs';
 import { AuthController } from '../../Shared/Controllers/auth.controller';
@@ -48,7 +48,7 @@ export class LoginComponent implements OnInit{
             //console.log('Resposta do login:', result);
             console.log('Usuário logado com sucesso');
             this.loginForm?.reset();
-            this.router.navigateByUrl('');
+            this.router.navigateByUrl('/home');
           }
         })
       )

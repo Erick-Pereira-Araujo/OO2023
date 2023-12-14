@@ -16,6 +16,9 @@ public class JogadorService {
 	@Autowired
 	private JogadorRepository jogadorRepository;
 	
+	@Autowired
+	private HeroiService heroiService;
+	
 	public List<Jogador> findAll(){
 		return jogadorRepository.findAll();
 	}
@@ -25,31 +28,42 @@ public class JogadorService {
 	    return jogador.orElseThrow(() -> new NoSuchElementException("Jogador não encontrado"));
 	}
 	
-    public Jogador procurarJogadorPorNome(String nomeJogador) {
-    	Jogador jogador = jogadorRepository.findJogadorByNome(nomeJogador);
-  		return jogador;
-    }
     
-	public Jogador salvar(Jogador jogador) {
+	public Jogador cadastarJogador(Jogador jogador) {
+		heroiService.criarHeroi(jogador.getId());
 		return jogadorRepository.save(jogador);
 	}
 	
+	public Jogador atualizarLoginStatus(Jogador jogador) {
+		
+		Jogador jogadorAtualizado = findById(jogador.getId());
+		
+		if(jogadorAtualizado.getLoginStatus() == false) {
+			jogadorAtualizado.setLoginStatus(true);
+		}else{
+			jogadorAtualizado.setLoginStatus(false);
+		}
+		
+		return jogadorRepository.save(jogadorAtualizado);
+	}
+	
 	public Boolean verificaNomeJogadorExiste(String nomeJogador) {
-	    Jogador jogador = jogadorRepository.findJogadorByNome(nomeJogador);
+	    Jogador jogador = jogadorRepository.findJogadorBynomeJogador(nomeJogador);
 	    if(jogador == null) {
 	    	return true;
 	    }
 	    return false;
 	}
 	
-	public Boolean verificaLogin(Jogador jogador) {
+	public Integer verificaLogin(Jogador jogador) {
 		List<Jogador> jogadores = findAll();
 		for(int i=0; i<jogadores.size(); ++i){
 			if(jogadores.get(i).getNomeJogador().equals(jogador.getNomeJogador()) 
 					&& jogadores.get(i).getSenha().equals(jogador.getSenha())) {
-				return true;
+				atualizarLoginStatus(jogadores.get(i));
+				return jogadores.get(i).getId();
 			}
 		}
-		return false;
+		return null;
 	}
 }

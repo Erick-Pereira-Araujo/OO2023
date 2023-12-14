@@ -18,14 +18,23 @@ import com.epicPrompt.Services.JogadorService;
 public class JogadorController {
 	
 	@Autowired
-	private JogadorService service;
+	private JogadorService jogadorService;
 	
 	@RequestMapping(value = "/cadastrar", method = RequestMethod.POST)
 	public ResponseEntity<Jogador> addJogador(@RequestBody Jogador jogador) {
-		if(service.verificaNomeJogadorExiste(jogador.getNomeJogador()) == false) {
+		if(jogadorService.verificaNomeJogadorExiste(jogador.getNomeJogador()) == false) {
 			return null;
 		}
-		return new ResponseEntity<>(service.salvar(jogador), HttpStatus.CREATED);
+		return new ResponseEntity<>(jogadorService.cadastarJogador(jogador), HttpStatus.CREATED);
+	}
+	
+	@RequestMapping(value = "/login", method = RequestMethod.GET)
+	public Integer logarJogador(@RequestBody Jogador jogador) {
+		if(jogadorService.verificaLogin(jogador) == null) {
+			return null;
+		}
+		
+		return jogador.getId();
 	}
 
 }
