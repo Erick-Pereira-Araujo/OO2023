@@ -1,11 +1,56 @@
-<p>home works!</p>
-<button type="button" class="btn btn-primary" [routerLink]="['fase-1']">Fase 1</button>
-<button type="button" class="btn btn-primary" [routerLink]="['fase-2']">Fase 2</button>
-<button type="button" class="btn btn-primary" [routerLink]="['fase-3']">Fase 3</button>
-<button type="button" class="btn btn-primary" [routerLink]="['fase-4']">Fase 4</button>
-<button type="button" class="btn btn-primary">Fase 5</button>
-<button type="button" class="btn btn-primary">Fase 6</button>
-<button type="button" class="btn btn-primary">Fase 7</button>
-<button type="button" class="btn btn-primary">Fase 8</button>
-<button type="button" class="btn btn-primary">Fase 9</button>
-<button type="button" class="btn btn-primary">Fase 10</button>
+<div class="container bem_vindo">
+    <p class="col-2" style="margin: 0px;">Bem vindo(a) {{jogador?.nomeJogador}}</p>
+    <h1 class="col-8" style="padding-left: 45px;">
+        EPIC<img src="../../../assets/Images/img1.png" alt="img">PROMPT
+    </h1>
+    <button style="margin: 0px; padding: 5px 10px;" type="button" (click)="logout()" class="botoes col-2">Logout</button>
+</div>
+
+<div class="container">    
+    <div class="row">
+        <div class="col">
+            <h2 style="margin-bottom: 20px; text-align: center;">Seu Herói está no nivel {{jogador?.heroi?.nivel}}</h2>
+            <img style="margin-bottom: 20px;" src="../../../assets/Images/Cavaleiro.png" alt="img">
+            <table class="table">
+                <thead>
+                    <tr>
+                      <th scope="col">Atributo</th>
+                      <th scope="col">Valor atual</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <th scope="row">Vida</th>
+                        <td>{{jogador?.heroi?.vida}}</td>
+                    </tr>
+                    <tr>
+                        <th scope="row">Ataque</th>
+                        <td>{{jogador?.heroi?.ataque}}</td>
+                    </tr>
+                    <tr>
+                        <th scope="row">Defesa</th>
+                        <td>{{jogador?.heroi?.defesa}}</td>
+                    </tr>
+                    <tr>
+                        <th scope="row">Experiência</th>
+                        <td>{{jogador?.heroi?.barraXP - jogador?.heroi?.xpAtual}} p/ próximo nível</td>
+                    </tr>
+                </tbody>
+              </table>
+        </div>
+        <div class="alinharBotoes col">
+            <h2 style="text-align: center;">Escolha uma fase para jogar</h2>
+            <button type="button" class="botoes" [routerLink]="['fase-1']">Fase 1</button>
+            <button type="button" class="botoes" [routerLink]="['fase-2']">Fase 2</button>
+            <button type="button" class="botoes" [routerLink]="['fase-3']">Fase 3</button>
+            <button type="button" class="botoes" [routerLink]="['fase-4']">Fase 4 <span *ngIf="podeAcessarNivel(4)" class="bi bi-lock-fill" aria-hidden="true"></span></button>
+            <button type="button" class="botoes">Fase 5 <span *ngIf="podeAcessarNivel(5)" class="bi bi-lock-fill" aria-hidden="true"></span></button>
+            <button type="button" class="botoes">Fase 6 <span *ngIf="podeAcessarNivel(6)" class="bi bi-lock-fill" aria-hidden="true"></span></button>
+            <button type="button" class="botoes">Fase 7 <span *ngIf="podeAcessarNivel(7)" class="bi bi-lock-fill" aria-hidden="true"></span></button>
+            <button type="button" class="botoes">Fase 8 <span *ngIf="podeAcessarNivel(8)" class="bi bi-lock-fill" aria-hidden="true"></span></button>
+            <button type="button" class="botoes">Fase 9 <span *ngIf="podeAcessarNivel(9)" class="bi bi-lock-fill" aria-hidden="true"></span></button>
+            <button type="button" class="botoes">Fase 10 <span *ngIf="podeAcessarNivel(10)" class="bi bi-lock-fill" aria-hidden="true"></span></button>
+        </div>
+    </div>
+</div>
+

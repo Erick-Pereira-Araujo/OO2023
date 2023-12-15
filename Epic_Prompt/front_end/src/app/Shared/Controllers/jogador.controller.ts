@@ -3,7 +3,6 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable, tap } from 'rxjs';
 import { environment } from '../../environments/environment';
-import { LoginResponse } from '../Models/LoginResponse';
 
 @Injectable({
   providedIn: 'root'
@@ -18,9 +17,16 @@ export class JogadorController {
     return this.http.post<Jogador>(`${this.urlBase}cadastrar`, obj)
   }
 
-
   loginJogador(jogador: Jogador): Observable<number | null> {
     return this.http.post<number>(`${this.urlBase}login`, jogador);
+  }
+
+  logoutJogador(jogador: Jogador): Observable<number | null> {
+    return this.http.post<number>(`${this.urlBase}logout`, jogador);
+  }
+
+  getJogador(id: number): Observable<Jogador> {
+    return this.http.get<Jogador>(`${this.urlBase}jogador/${id}`)
   }
   
 

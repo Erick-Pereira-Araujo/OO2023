@@ -3,6 +3,7 @@ import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { JogadorController} from '../../Shared/Controllers/jogador.controller'
 import { tap } from 'rxjs';
+import { SnackbarService } from '../snackbar/snackbar.service';
 
 @Component({
   selector: 'app-cadastrar',
@@ -15,7 +16,8 @@ export class CadastrarComponent implements OnInit{
 
   constructor(private _formBuilder: FormBuilder,
     private router : Router,
-    private jogadorController : JogadorController,){ }
+    private jogadorController : JogadorController,
+    private snackbarService: SnackbarService,){ }
 
   ngOnInit(): void {
     this.cadastrarForm = this._formBuilder.group({
@@ -35,10 +37,10 @@ export class CadastrarComponent implements OnInit{
       .pipe(
         tap((result) => {
           if (result === null) {
-            console.log('Usuário não cadastrado: Retorno do backend é null');
+            this.snackbarService.openSnackBar('Já existe um jogador com esse nome, favor escolha outro', 'Entendi')
             throw new Error('Retorno do backend é null');
           } else {
-            console.log('Usuário cadastrado com sucesso');
+            this.snackbarService.openSnackBar('Jogador cadastrado com sucesso', 'Entendi')
             this.cadastrarForm?.reset();
             this.router.navigateByUrl('/login');
           }

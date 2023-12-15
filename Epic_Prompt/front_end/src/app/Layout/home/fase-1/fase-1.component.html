@@ -1,1 +1,16 @@
-<p>fase-1 works!</p>
+<div class="container">
+    <div class="row">
+        <div class="col-6">
+            <div class="barraVida">
+                <div class="valorVida" [style.width.%]="calcularPorcentagemVida()">
+                    Vida: {{ jogador?.heroi?.vida }} / 100
+                </div>
+            </div>
+            <img style="margin-bottom: 20px;" src="../../../assets/Images/Cavaleiro.png" alt="img">
+        </div>
+        <div class="col-6">
+            <h2 style="margin-bottom: 20px; text-align: center;">Vilão</h2>
+            <img style="margin-bottom: 20px;" src="../../../assets/Images/Cavaleiro.png" alt="img">
+        </div>
+    </div>
+</div>

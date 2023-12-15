@@ -6,6 +6,8 @@ import { HttpClientModule } from '@angular/common/http';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { MatSnackBarModule } from '@angular/material/snack-bar';
 
 
 @NgModule({
@@ -17,7 +19,9 @@ import { AppComponent } from './app.component';
     AppRoutingModule,
     FormsModule,
     RouterModule,
-    HttpClientModule
+    HttpClientModule,
+    BrowserAnimationsModule,
+    MatSnackBarModule
     
   ],
   providers: [

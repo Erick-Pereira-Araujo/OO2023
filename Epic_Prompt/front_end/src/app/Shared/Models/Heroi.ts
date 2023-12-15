@@ -5,4 +5,5 @@ export interface Heroi {
     defesa: number;
     idJogador: number;
     barraXP: number;
+    xpAtual: number;
 }

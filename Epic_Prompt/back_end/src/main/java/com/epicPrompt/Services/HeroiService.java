@@ -19,6 +19,7 @@ public class HeroiService {
 		heroi.setNivel(1);
 		heroi.setVida(100);
 		heroi.setBarraXP(100);
+		heroi.setXpAtual(0);
 		
 		return heroiRepository.save(heroi);
 	}

@@ -14,12 +14,15 @@ public class Heroi extends Personagem{
 	
 	private Integer barraXP;
 	
+	private Integer xpAtual;
+	
 	public Heroi() {
 	}
 
-	public Heroi(Integer barraXP) {
+	public Heroi(Integer barraXP, Integer xpAtual) {
 		super();
 		this.barraXP = barraXP;
+		this.xpAtual = xpAtual;
 	}
 
 	public Integer getId() {
@@ -36,6 +39,14 @@ public class Heroi extends Personagem{
 
 	public void setBarraXP(Integer barraXP) {
 		this.barraXP = barraXP;
+	}
+
+	public Integer getXpAtual() {
+		return xpAtual;
+	}
+
+	public void setXpAtual(Integer xpAtual) {
+		this.xpAtual = xpAtual;
 	}
 
 }
