@@ -1,16 +1,77 @@
-<div class="container">
+<div class="container" style="display: flex; flex-direction: column; align-items: center;">
+    <h1>Vilão do Poder Sombrio</h1>
     <div class="row">
         <div class="col-6">
             <div class="barraVida">
-                <div class="valorVida" [style.width.%]="calcularPorcentagemVida()">
-                    Vida: {{ jogador?.heroi?.vida }} / 100
+                <div class="valorVida" [style.width.%]="calcularPorcentagemVida(1)">
+                    Vida: {{ vidaAtualHeroi }} / {{ vidaMaximaHeroi }}
                 </div>
             </div>
-            <img style="margin-bottom: 20px;" src="../../../assets/Images/Cavaleiro.png" alt="img">
+            <img width="75%" style="margin-bottom: 20px;" src="../../../assets/Images/Cavaleiro.png" alt="img">
+            <table class="table">
+                <thead>
+                    <tr>
+                      <th scope="col">Atributo</th>
+                      <th scope="col">Valor atual</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngIf="verificaAtaque()">
+                        <th scope="row">Ataque</th>
+                        <td>{{heroi?.ataque}}</td>
+                    </tr>
+                    <tr *ngIf="!verificaAtaque()">
+                        <th scope="row">Ataque</th>
+                        <td style="color: red;">{{heroi?.ataque*0.8}} dano reduzido</td>
+                    </tr>
+                    <tr>
+                        <th scope="row">Defesa</th>
+                        <td>{{heroi?.defesa}}</td>
+                    </tr>
+                </tbody>
+            </table>
         </div>
         <div class="col-6">
-            <h2 style="margin-bottom: 20px; text-align: center;">Vilão</h2>
-            <img style="margin-bottom: 20px;" src="../../../assets/Images/Cavaleiro.png" alt="img">
+            <div class="barraVida">
+                <div class="valorVida" [style.width.%]="calcularPorcentagemVida(2)">
+                    Vida: {{ vidaAtualVilao }} / {{ vidaMaximaVilao }}
+                </div>
+            </div>
+            <img width="75%" style="margin-bottom: 20px;" src="../../../assets/Images/Cavaleiro.png" alt="img">
+            <table class="table">
+                <thead>
+                    <tr>
+                      <th scope="col">Atributo</th>
+                      <th scope="col">Valor atual</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <th scope="row">Ataque</th>
+                        <td>{{vilao?.ataque}}</td>
+                    </tr>
+                    <tr>
+                        <th scope="row">Defesa</th>
+                        <td>{{vilao?.defesa}}</td>
+                    </tr>
+                    <tr>
+                        <th scope="row">Ataque Especial</th>
+                        <td>Reduz o ataque do herói em 20% por 3 turnos</td>
+                    </tr>
+                </tbody>
+            </table>
         </div>
     </div>
+    <div class="row">
+        <div class="col-6">
+            <button type="button" (click)="heroiAtaca()" class="botoes">Atacar</button>
+        </div>
+        <div class="col-6">
+            <button type="button" (click)="heroiDefende()" class="botoes">Defender</button>
+        </div>
+    </div>
+    <ul>
+        <li *ngFor="let log of logAcoes; let i = index">Turno: {{i+1}}, Você {{log.acaoHeroi}}, o Vilão {{log.acaoVilao}}</li>
+    </ul>
 </div>
+

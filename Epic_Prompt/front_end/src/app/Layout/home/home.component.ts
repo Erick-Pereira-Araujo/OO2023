@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { JogadorController } from '../../Shared/Controllers/jogador.controller';
 import { SnackbarService } from '../snackbar/snackbar.service';
+import { catchError, mergeMap, of } from 'rxjs';
 
 @Component({
   selector: 'app-home',
@@ -36,14 +37,24 @@ export class HomeComponent implements OnInit{
   }
 
   carregaJogador(){
-    this.jogadorController.getJogador(this.idJogador).subscribe(res => {
-      if(res.loginStatus == true){
-        this.jogador = res;
-      }else{
-        this.router.navigateByUrl('/login');
-        this.snackbarService.openSnackBar('Você deve logar primeiro antes de acessar a página de jogador', 'Entendi')
-      }
-    })
+    this.jogadorController.getJogador(this.idJogador).pipe(
+      mergeMap((res) => {
+        if (res && res.loginStatus === true) {
+          this.jogador = res;
+          return of(true);
+        } else {
+          this.router.navigateByUrl('/login');
+          this.snackbarService.openSnackBar('Você deve logar primeiro antes de acessar a página de jogador', 'Entendi');
+          return of(false);
+        }
+      }),
+      catchError((error) => {
+        this.router.navigateByUrl('/cadastrar');
+        this.snackbarService.openSnackBar('Jogador não cadastrado, favor cadastre-se para jogar', 'Entendi');
+        return of(false);
+      })
+    ).subscribe((result) => {
+    });
   }
 
   logout(){

@@ -12,6 +12,8 @@ public class Heroi extends Personagem{
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;	
 	
+	private Integer nivel;
+	
 	private Integer barraXP;
 	
 	private Integer xpAtual;
@@ -19,10 +21,11 @@ public class Heroi extends Personagem{
 	public Heroi() {
 	}
 
-	public Heroi(Integer barraXP, Integer xpAtual) {
+	public Heroi(Integer nivel, Integer barraXP, Integer xpAtual) {
 		super();
 		this.barraXP = barraXP;
 		this.xpAtual = xpAtual;
+		this.nivel = nivel;
 	}
 
 	public Integer getId() {
@@ -31,6 +34,14 @@ public class Heroi extends Personagem{
 
 	public void setId(Integer id) {
 		this.id = id;
+	}
+	
+	public Integer getNivel() {
+		return nivel;
+	}
+
+	public void setNivel(Integer nivel) {
+		this.nivel = nivel;
 	}
 
 	public Integer getBarraXP() {

@@ -7,21 +7,11 @@ import jakarta.persistence.MappedSuperclass;
 @MappedSuperclass
 public abstract class Personagem {
 	
-	protected Integer nivel;
-	
 	protected Integer vida;
 	
 	protected Integer ataque;
 	
 	protected Integer defesa;
-
-	public Integer getNivel() {
-		return nivel;
-	}
-
-	public void setNivel(Integer nivel) {
-		this.nivel = nivel;
-	}
 
 	public Integer getVida() {
 		return vida;

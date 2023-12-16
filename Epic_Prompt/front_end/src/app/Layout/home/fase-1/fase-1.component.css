@@ -1,15 +1,23 @@
-.health-bar {
+.barraVida {
+  position: relative;
   width: 100%;
   background-color: #ddd;
+  margin-bottom: 50px;
 }
 
-.health-value {
+.valorVida {
+  position: absolute;
+  top: 0;
+  left: 50%; /* Ajuste para centralizar o texto */
+  transform: translateX(-50%); /* Centraliza o texto na barra */
   height: 30px; 
   background-color: #4caf50; 
   text-align: center;
   line-height: 30px;
   color: white;
+  white-space: nowrap;
 }
+
 
 h1 {
   color: #F6E083;

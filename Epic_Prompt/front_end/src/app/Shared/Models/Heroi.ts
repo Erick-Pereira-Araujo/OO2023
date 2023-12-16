@@ -1,9 +1,9 @@
 export interface Heroi {
+    id: number;
     nivel: number;
     vida: number;
     ataque: number;
     defesa: number;
-    idJogador: number;
     barraXP: number;
     xpAtual: number;
 }
