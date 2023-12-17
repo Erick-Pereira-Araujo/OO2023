@@ -25,5 +25,10 @@ public class HeroiController {
 	public ResponseEntity<Heroi> levelUP(@RequestBody Heroi heroi, @PathVariable Integer dropXP) {
 		return new ResponseEntity<>(heroiService.levelUp(heroi, dropXP), HttpStatus.ACCEPTED);
 	}
+	
+	@RequestMapping(value = "/ganhaXP/{dropXP}", method = RequestMethod.PUT)
+	public ResponseEntity<Heroi> ganhaXP(@RequestBody Heroi heroi, @PathVariable Integer dropXP) {
+		return new ResponseEntity<>(heroiService.ganhaXP(heroi, dropXP), HttpStatus.ACCEPTED);
+	}
 
 }

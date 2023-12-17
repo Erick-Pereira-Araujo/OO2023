@@ -82,21 +82,25 @@ export class Fase1Component implements OnInit{
       return (this.vidaAtualHeroi / this.vidaMaximaHeroi) * 100;
     }
     return (this.vidaAtualVilao / this.vidaMaximaVilao) * 100;
-  }
+  } 
 
   heroiAtaca(){
-    console.log(this.marcadorDanoReduzido);
     let log: LogAcoes;
     let acaoVilao = this.vilaoRelizaAcao();
     let ataqueTemp: number;
     if(this.marcadorDanoReduzido > 0){
       ataqueTemp = this.heroi.ataque * 0.8;
+      this.marcadorDanoReduzido--;
     }else{
       ataqueTemp = this.heroi.ataque;
     }
     if(acaoVilao == 0){
-      this.vidaAtualHeroi -= (this.vilao.ataque - this.heroi.defesa);
-      this.vidaAtualVilao -= (ataqueTemp - this.vilao.defesa);
+      if(this.vilao.ataque - this.heroi.defesa > 0){
+        this.vidaAtualHeroi -= (this.vilao.ataque - this.heroi.defesa);
+      }
+      if(ataqueTemp - this.vilao.defesa > 0){
+        this.vidaAtualVilao -= (ataqueTemp - this.vilao.defesa);
+      }
       log = {
         acaoHeroi: 'Atacou',
         acaoVilao: 'Atacou'
@@ -110,21 +114,19 @@ export class Fase1Component implements OnInit{
         acaoVilao: 'Defendeu'
       };
     }else{
-      this.vidaAtualVilao -= (ataqueTemp - this.vilao.defesa);
+      if(ataqueTemp - this.vilao.defesa){
+        this.vidaAtualVilao -= (ataqueTemp - this.vilao.defesa);
+      }
       log = {
         acaoHeroi: 'Atacou',
         acaoVilao: 'usou Ataque Especial'
       };
-    }
-    if(this.marcadorDanoReduzido > 0){
-      this.marcadorDanoReduzido--;
     }
     this.logAcoes.push(log);
     this.verificaFimLuta();
   }
 
   heroiDefende(){
-    console.log(this.marcadorDanoReduzido);
     let log: LogAcoes;
     let acaoVilao = this.vilaoRelizaAcao();
     if(acaoVilao == 0){
@@ -154,10 +156,9 @@ export class Fase1Component implements OnInit{
   }
 
   vilaoRelizaAcao(){
-    console.log("Acao Vilao" + this.vilao.vida * 0.3)
     if(this.vidaAtualVilao <= this.vilao.vida * 0.3 && this.marcadorDanoReduzido == 0){
       //Vilão realiza ataque especial
-      this.marcadorDanoReduzido = 3;
+      this.marcadorDanoReduzido = 4;
       return -1;
 
     }else{
@@ -184,6 +185,12 @@ export class Fase1Component implements OnInit{
     if(this.vidaAtualVilao <= 0){
       if(this.heroi.xpAtual + this.vilao.dropXP >= this.heroi.barraXP){
         this.heroiController.levelUp(this.vilao.dropXP, this.heroi).subscribe(res => {
+          this.heroi = res;
+          this.router.navigateByUrl(`/home/${this.heroi.id}`);
+          this.snackbarService.openSnackBar('Parabéns, você ganhou sua batalha e ganhou expêriencia para avançar em sua jornada', 'Entendi')
+        })
+      }else{
+        this.heroiController.ganhaXP(this.vilao.dropXP, this.heroi).subscribe(res => {
           this.heroi = res;
           this.router.navigateByUrl(`/home/${this.heroi.id}`);
           this.snackbarService.openSnackBar('Parabéns, você ganhou sua batalha e ganhou expêriencia para avançar em sua jornada', 'Entendi')

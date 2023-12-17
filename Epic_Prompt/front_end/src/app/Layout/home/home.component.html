@@ -43,13 +43,13 @@
             <button type="button" class="botoes" [routerLink]="['fase-1']">Fase 1</button>
             <button type="button" class="botoes" [routerLink]="['fase-2']">Fase 2</button>
             <button type="button" class="botoes" [routerLink]="['fase-3']">Fase 3</button>
-            <button type="button" class="botoes" [routerLink]="['fase-4']">Fase 4 <span *ngIf="podeAcessarNivel(4)" class="bi bi-lock-fill" aria-hidden="true"></span></button>
-            <button type="button" class="botoes">Fase 5 <span *ngIf="podeAcessarNivel(5)" class="bi bi-lock-fill" aria-hidden="true"></span></button>
-            <button type="button" class="botoes">Fase 6 <span *ngIf="podeAcessarNivel(6)" class="bi bi-lock-fill" aria-hidden="true"></span></button>
-            <button type="button" class="botoes">Fase 7 <span *ngIf="podeAcessarNivel(7)" class="bi bi-lock-fill" aria-hidden="true"></span></button>
-            <button type="button" class="botoes">Fase 8 <span *ngIf="podeAcessarNivel(8)" class="bi bi-lock-fill" aria-hidden="true"></span></button>
-            <button type="button" class="botoes">Fase 9 <span *ngIf="podeAcessarNivel(9)" class="bi bi-lock-fill" aria-hidden="true"></span></button>
-            <button type="button" class="botoes">Fase 10 <span *ngIf="podeAcessarNivel(10)" class="bi bi-lock-fill" aria-hidden="true"></span></button>
+            <button type="button" class="botoes" [disabled]="podeAcessarNivel(4)" [routerLink]="['fase-4']">Fase 4 <span *ngIf="podeAcessarNivel(4)" class="bi bi-lock-fill" aria-hidden="true"></span></button>
+            <button type="button" class="botoes" [disabled]="podeAcessarNivel(5)" [routerLink]="['fase-5']">Fase 5 <span *ngIf="podeAcessarNivel(5)" class="bi bi-lock-fill" aria-hidden="true"></span></button>
+            <button type="button" class="botoes" [disabled]="podeAcessarNivel(6)" [routerLink]="['fase-6']">Fase 6 <span *ngIf="podeAcessarNivel(6)" class="bi bi-lock-fill" aria-hidden="true"></span></button>
+            <button type="button" class="botoes" [disabled]="podeAcessarNivel(7)" [routerLink]="['fase-7']">Fase 7 <span *ngIf="podeAcessarNivel(7)" class="bi bi-lock-fill" aria-hidden="true"></span></button>
+            <button type="button" class="botoes" [disabled]="podeAcessarNivel(8)" [routerLink]="['fase-8']">Fase 8 <span *ngIf="podeAcessarNivel(8)" class="bi bi-lock-fill" aria-hidden="true"></span></button>
+            <button type="button" class="botoes" [disabled]="podeAcessarNivel(9)" [routerLink]="['fase-9']">Fase 9 <span *ngIf="podeAcessarNivel(9)" class="bi bi-lock-fill" aria-hidden="true"></span></button>
+            <button type="button" class="botoes" [disabled]="podeAcessarNivel(10)" [routerLink]="['fase-10']">Fase 10 <span *ngIf="podeAcessarNivel(10)" class="bi bi-lock-fill" aria-hidden="true"></span></button>
         </div>
     </div>
 </div>

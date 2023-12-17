@@ -17,4 +17,8 @@ export class HeroiController {
     return this.http.put<Heroi>(`${this.urlBase}heroi/${dropXp}`, obj)
   }
 
+  ganhaXP(dropXp: number, obj: Heroi): Observable<Heroi> {
+    return this.http.put<Heroi>(`${this.urlBase}heroi/ganhaXP/${dropXp}`, obj)
+  }
+
 }

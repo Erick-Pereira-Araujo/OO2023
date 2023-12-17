@@ -57,5 +57,13 @@ public class HeroiService {
 		//atualiza o heroi no banco e retorna esse heroi.
 		return heroiRepository.save(heroi);
 	}
+	
+	public Heroi ganhaXP(Heroi heroi, Integer dropXP){
+		heroi.setXpAtual(heroi.getXpAtual() + dropXP);
+		
+		//atualiza o heroi no banco e retorna esse heroi.
+		return heroiRepository.save(heroi);
+	}
+
 
 }
