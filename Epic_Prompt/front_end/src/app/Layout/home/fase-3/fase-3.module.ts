@@ -14,4 +14,4 @@ import { Fase3RoutingModule } from './fase-3-routing.module';
     Fase3RoutingModule
   ]
 })
-export class Fase1Module { }
+export class Fase3Module { }

@@ -8,11 +8,11 @@ import { LogAcoes } from '../../../Shared/Models/LogAcoes';
 import { catchError, mergeMap, of } from 'rxjs';
 
 @Component({
-  selector: 'app-fase-2',
-  templateUrl: './fase-2.component.html',
-  styleUrl: './fase-2.component.css'
+  selector: 'app-fase-10',
+  templateUrl: './fase-10.component.html',
+  styleUrl: './fase-10.component.css'
 })
-export class Fase2Component implements OnInit{
+export class Fase10Component  implements OnInit{
 
   constructor(
     private router : Router,
@@ -32,7 +32,7 @@ export class Fase2Component implements OnInit{
   vidaAtualVilao: any;
   vidaMaximaVilao: any;
   logAcoes: LogAcoes[] = [];
-  marcadorQueimadura: any;
+  aniquilaçãoTotal: any;
 
   ngOnInit(): void {
     this.route.params.subscribe(params => {
@@ -42,8 +42,7 @@ export class Fase2Component implements OnInit{
     this.carregaVilao();
     this.calcularPorcentagemVida(1);
     this.calcularPorcentagemVida(2);
-    this.marcadorQueimadura = 0;
-    this.verificaAtaque();
+    this.aniquilaçãoTotal = 0;
   }
 
   carregaJogador(){
@@ -70,7 +69,7 @@ export class Fase2Component implements OnInit{
   }
 
   carregaVilao(){
-    this.vilaoController.getVilao(2).subscribe(res => {
+    this.vilaoController.getVilao(10).subscribe(res => {
       this.vilao = res;
       this.vidaAtualVilao = this.vilao.vida;
       this.vidaMaximaVilao = this.vilao.vida;
@@ -86,17 +85,16 @@ export class Fase2Component implements OnInit{
 
   heroiAtaca(){
     let log: LogAcoes;
-    if(this.marcadorQueimadura > 0){
-      this.vidaAtualHeroi -= 10;
-      this.marcadorQueimadura--;
-    }
     let acaoVilao = this.vilaoRelizaAcao();
+    if(this.aniquilaçãoTotal > 0){
+      this.aniquilaçãoTotal--;
+    }
     if(acaoVilao == 0){
-      if(this.vilao.ataque - this.heroi.defesa>0){
+      if(this.vilao.ataque - this.heroi.defesa > 0){
         this.vidaAtualHeroi -= (this.vilao.ataque - this.heroi.defesa);
       }
-      if(this.heroi.ataque - this.vilao.defesa){
-        this.vidaAtualVilao -= (this.heroi.ataque - this.vilao.defesa);
+      if(this.heroi.ataque - this.vilao.defesa > 0){
+        this.vidaAtualVilao -= this.heroi.ataque - this.vilao.defesa;
       }
       log = {
         acaoHeroi: 'Atacou',
@@ -111,10 +109,9 @@ export class Fase2Component implements OnInit{
         acaoVilao: 'Defendeu'
       };
     }else{
-      if(this.heroi.ataque - this.vilao.defesa){
-        this.vidaAtualVilao -= (this.heroi.ataque - this.vilao.defesa);
+      if(this.heroi.ataque - this.vilao.defesa > 0){
+        this.vidaAtualVilao -= this.heroi.ataque - this.vilao.defesa;
       }
-      this.vidaAtualHeroi -= 30;
       log = {
         acaoHeroi: 'Atacou',
         acaoVilao: 'usou Ataque Especial'
@@ -126,11 +123,10 @@ export class Fase2Component implements OnInit{
 
   heroiDefende(){
     let log: LogAcoes;
-    if(this.marcadorQueimadura > 0){
-      this.vidaAtualHeroi -= 10;
-      this.marcadorQueimadura--;
-    }
     let acaoVilao = this.vilaoRelizaAcao();
+    if(this.aniquilaçãoTotal > 0){
+      this.aniquilaçãoTotal--;
+    }
     if(acaoVilao == 0){
       if(this.vilao.ataque - (this.heroi.defesa*2) > 0){
         this.vidaAtualHeroi -= (this.vilao.ataque - (this.heroi.defesa*2));
@@ -155,15 +151,16 @@ export class Fase2Component implements OnInit{
   }
 
   vilaoRelizaAcao(){
-    if(this.vidaAtualVilao <= this.vilao.vida * 0.20 && this.marcadorQueimadura == 0){
+    if(this.vidaAtualVilao <= this.vilao.vida * 0.35 && this.aniquilaçãoTotal == 0){
       //Vilão realiza ataque especial
-      this.marcadorQueimadura = 4;
+      this.vidaAtualVilao += this.vilao.vida*0.20;
+      this.aniquilaçãoTotal = 4;
       return -1;
 
     }else{
       //Vilão realiza ação normal
       const randomNumber = Math.floor(Math.random() * 2);
-      if (randomNumber === 0) {
+      if (randomNumber === 0 || this.aniquilaçãoTotal > 0) {
         //vilão ataca
         return 0;
       } else {
@@ -172,13 +169,6 @@ export class Fase2Component implements OnInit{
       }
     }
   }
-
-  verificaAtaque(){
-    if(this.marcadorQueimadura==0){
-      return true
-    }
-    return false;
-  }
   
   verificaFimLuta(){
     if(this.vidaAtualVilao <= 0){
@@ -186,7 +176,7 @@ export class Fase2Component implements OnInit{
         this.heroiController.levelUp(this.vilao.dropXP, this.heroi).subscribe(res => {
           this.heroi = res;
           this.router.navigateByUrl(`/home/${this.heroi.id}`);
-          this.snackbarService.openSnackBar('Parabéns, você subiu de nível, continue em sua jornada', 'Entendi')
+          this.snackbarService.openSnackBar('Parabéns, você ganhou sua batalha e ganhou expêriencia para avançar em sua jornada', 'Entendi')
         })
       }else{
         this.heroiController.ganhaXP(this.vilao.dropXP, this.heroi).subscribe(res => {
@@ -201,5 +191,6 @@ export class Fase2Component implements OnInit{
       this.snackbarService.openSnackBar('Derrota, infelizmente você perdeu a sua batalha contra o vilão', 'Entendi')
     }
   }
+
 
 }

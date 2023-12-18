@@ -1,0 +1,72 @@
+<div class="container" style="display: flex; flex-direction: column; align-items: center;">
+    <h1>Vilão Cura Profunda</h1>
+    <div class="row">
+        <div class="col-6">
+            <div class="barraVida">
+                <div class="valorVida" [style.width.%]="calcularPorcentagemVida(1)">
+                    Vida: {{ vidaAtualHeroi }} / {{ vidaMaximaHeroi }}
+                </div>
+            </div>
+            <img width="75%" style="margin-bottom: 20px; margin-top: 20px;" src="../../../assets/Images/Cavaleiro.png" alt="img">
+            <table class="table">
+                <thead>
+                    <tr>
+                      <th scope="col">Atributo</th>
+                      <th scope="col">Valor atual</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <th scope="row">Ataque</th>
+                        <td>{{heroi?.ataque}}</td>
+                    </tr>
+                    <tr>
+                        <th scope="row">Defesa</th>
+                        <td>{{heroi?.defesa}}</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <div class="col-6">
+            <div class="barraVida">
+                <div class="valorVida" [style.width.%]="calcularPorcentagemVida(2)">
+                    Vida: {{ vidaAtualVilao }} / {{ vidaMaximaVilao }}
+                </div>
+            </div>
+            <img width="75%" style="margin-bottom: 20px; margin-top: 20px;" src="../../../../assets/Images/cavaleiro_fase_9.png" alt="img">
+            <table class="table">
+                <thead>
+                    <tr>
+                      <th scope="col">Atributo</th>
+                      <th scope="col">Valor atual</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <th scope="row">Ataque</th>
+                        <td>{{vilao?.ataque}}</td>
+                    </tr>
+                    <tr>
+                        <th scope="row">Defesa</th>
+                        <td>{{vilao?.defesa}}</td>
+                    </tr>
+                    <tr>
+                        <th scope="row">Ataque Especial</th>
+                        <td> Cura 50% da vida do vilão e concede um buff que aumenta o ataque em 20% por 3 turnos</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-6">
+            <button type="button" (click)="heroiAtaca()" class="botoes">Atacar</button>
+        </div>
+        <div class="col-6">
+            <button type="button" (click)="heroiDefende()" class="botoes">Defender</button>
+        </div>
+    </div>
+    <ul>
+        <li *ngFor="let log of logAcoes; let i = index">Turno: {{i+1}}, Você {{log.acaoHeroi}}, o Vilão {{log.acaoVilao}}</li>
+    </ul>
+</div>
