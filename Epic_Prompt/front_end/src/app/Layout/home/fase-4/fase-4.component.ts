@@ -153,8 +153,8 @@ export class Fase4Component  implements OnInit{
   vilaoRelizaAcao(){
     if(this.vidaAtualVilao <= this.vilao.vida * 0.35 && this.marcadorCura == 0){
       //Vilão realiza ataque especial
-      this.vidaAtualVilao += this.vilao.vida*0.20;
-      this.marcadorCura = 4;
+      this.vidaAtualVilao += this.vilao.vida*0.15;
+      this.marcadorCura = 5;
       return -1;
 
     }else{

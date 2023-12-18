@@ -25,6 +25,7 @@ public class VilaoService {
 	}
 	
 	public void iniciaBanco() {
+		Vilao vilao1 =  new Vilao();
 		
 		Vilao vilao1 =  new Vilao();
 		vilao1.setId(1);
@@ -106,6 +107,7 @@ public class VilaoService {
 		criarVilao(vilao8);
 		criarVilao(vilao9);
 		criarVilao(vilao10);
+		
 	}
 	
 }

@@ -8,6 +8,9 @@ import { Fase4Component } from './fase-4/fase-4.component';
 import { Fase5Component } from './fase-5/fase-5.component';
 import { Fase6Component } from './fase-6/fase-6.component';
 import { Fase7Component } from './fase-7/fase-7.component';
+import { Fase8Component } from './fase-8/fase-8.component';
+import { Fase9Component } from './fase-9/fase-9.component';
+import { Fase10Component } from './fase-10/fase-10.component';
 
 
 const routes: Routes = [
@@ -19,7 +22,9 @@ const routes: Routes = [
   {path : 'fase-5', component: Fase5Component},
   {path : 'fase-6', component: Fase6Component},
   {path : 'fase-7', component: Fase7Component},
-
+  {path : 'fase-8', component: Fase8Component},
+  {path : 'fase-9', component: Fase9Component},
+  {path : 'fase-10', component: Fase10Component},
 ];
 
 @NgModule({
