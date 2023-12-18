@@ -1,5 +1,3 @@
-// fase-5.module.ts
-
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { Fase5Component } from './fase-5.component';

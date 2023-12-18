@@ -18,13 +18,13 @@
     white-space: nowrap;
   }
 
-  .valorVidaRoxa {
+  .valorVidaEscudo {
     position: absolute;
     top: 0;
     left: 50%;
     transform: translateX(-50%);
     height: 30px; 
-    background-color: #993399; 
+    background-color: #808080; /*cinza chumbo*/
     text-align: center;
     line-height: 30px;
     color: white;

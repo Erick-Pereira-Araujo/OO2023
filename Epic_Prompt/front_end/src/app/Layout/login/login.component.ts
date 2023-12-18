@@ -13,6 +13,7 @@ import { SnackbarService } from '../snackbar/snackbar.service';
 })
 export class LoginComponent implements OnInit{
 
+  //variavel do formulário
   loginForm!: FormGroup;
 
   constructor(private _formBuilder: FormBuilder,
@@ -27,23 +28,32 @@ export class LoginComponent implements OnInit{
     });
   }
 
+  //Função de logar
   logar() {
+    //Se o formulário estiver invalido ele retorna nada
     if (this.loginForm?.invalid) {
       return;
     }
 
+    //Se estiver vádido chama variavel jogadorcController da Classe controladora do jogador
+    //A função loginJogador serve para justamente logar o jogador.
     this.jogadorController.loginJogador(this.loginForm?.value)
       .pipe(
         tap((result) => {
+          //Se o retorno do backend for null significa que o jogador não está cadastrado.
           if (result === null) {
             this.snackbarService.openSnackBar('Jogador não cadastrado, favor cadastre-se', 'Entendi')
             throw new Error('Retorno do backend é null');
           } else {
 
-            var  idJogador = result;
+            //Caso contrário pega o id do jogador e passa para a variavel 
+            var idJogador = result;
 
+            //Mensagem de login de sucesso
             this.snackbarService.openSnackBar('Jogador logado com sucesso', 'Entendi')
             this.loginForm?.reset();
+
+            //Navega para a home page e passa o id do Jogador pela caminho para ser recuperado no componente home
             this.router.navigate(['/home', idJogador]);
           }
         })

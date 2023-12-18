@@ -8,11 +8,11 @@ import { LogAcoes } from '../../../Shared/Models/LogAcoes';
 import { catchError, mergeMap, of} from 'rxjs';
 
 @Component({
-  selector: 'app-fase-5',
-  templateUrl: './fase-5.component.html',
-  styleUrls: ['./fase-5.component.css'],
+  selector: 'app-fase-7',
+  templateUrl: './fase-7.component.html',
+  styleUrls: ['./fase-7.component.css'],
 })
-export class Fase5Component implements OnInit {
+export class Fase7Component implements OnInit {
   
   constructor(
     private router : Router,
@@ -24,8 +24,7 @@ export class Fase5Component implements OnInit {
   ){}
 
   logAcoes: LogAcoes[] = [];
-  heroiEnvenenado: boolean = false;
-  marcadorEnvenenamento: any;
+  marcadorEscudo: any;
   idJogador: any;
   heroi: any;
   vilao: any;
@@ -42,7 +41,7 @@ export class Fase5Component implements OnInit {
     this.carregaVilao();
     this.calcularPorcentagemVida(1);
     this.calcularPorcentagemVida(2);
-    this.marcadorEnvenenamento = 0;
+    this.marcadorEscudo = 0;
   }
 
   carregaJogador(){
@@ -69,7 +68,7 @@ export class Fase5Component implements OnInit {
   }
 
   carregaVilao(){
-    this.vilaoController.getVilao(4).subscribe(res => {
+    this.vilaoController.getVilao(7).subscribe(res => {
       this.vilao = res;
       this.vidaAtualVilao = this.vilao.vida;
       this.vidaMaximaVilao = this.vilao.vida;
@@ -85,95 +84,91 @@ export class Fase5Component implements OnInit {
   
   heroiAtaca() {
     let log: LogAcoes;
-
-    if (this.marcadorEnvenenamento > 0) {
-      this.marcadorEnvenenamento--;
-      this.vidaAtualHeroi -= 15;
-    }
-
     let acaoVilao = this.vilaoRelizaAcao();
-    if (acaoVilao == 0) {
-      // Vilão ataca
-      if (this.vilao.ataque - this.heroi.defesa > 0) {
-        this.vidaAtualHeroi -= this.vilao.ataque - this.heroi.defesa;
+    let danoRecebidoEscutoAtivo: any;
+    if(this.marcadorEscudo > 0){
+      danoRecebidoEscutoAtivo = (this.heroi.ataque - this.vilao.defesa)*0.3;
+      this.marcadorEscudo--;
+    }else{
+      danoRecebidoEscutoAtivo = this.heroi.ataque - this.vilao.defesa;
+    }
+    if(acaoVilao == 0){
+      if(this.vilao.ataque - this.heroi.defesa > 0){
+        this.vidaAtualHeroi -= (this.vilao.ataque - this.heroi.defesa);
       }
-  
-      if (this.heroi.ataque - this.vilao.defesa > 0) {
-        this.vidaAtualVilao -= this.heroi.ataque - this.vilao.defesa;
+      if(danoRecebidoEscutoAtivo > 0){
+        this.vidaAtualVilao -= danoRecebidoEscutoAtivo;
       }
-  
       log = {
         acaoHeroi: 'Atacou',
         acaoVilao: 'Atacou'
       };
-    } else if (acaoVilao == 1) {
-      // defesa
-      if (this.heroi.ataque - this.vilao.defesa * 2 > 0) {
-        this.vidaAtualVilao -= this.heroi.ataque- this.vilao.defesa * 2;
+    }else if(acaoVilao == 1){
+      if(this.heroi.ataque - (this.vilao.defesa)*2 > 0){
+        this.vidaAtualVilao -= (this.heroi.ataque - (this.vilao.defesa*2));
       }
-  
       log = {
         acaoHeroi: 'Atacou',
         acaoVilao: 'Defendeu'
       };
-    } else {
-      // ataque especial
-      if (this.heroi.ataque - this.vilao.defesa > 0) {
-        this.vidaAtualVilao -= this.heroi.ataque- this.vilao.defesa;
+    }else{
+      if(danoRecebidoEscutoAtivo > 0){
+        this.vidaAtualVilao -= danoRecebidoEscutoAtivo;
       }
       log = {
         acaoHeroi: 'Atacou',
         acaoVilao: 'usou Ataque Especial'
       };
     }
-  
     this.logAcoes.push(log);
     this.verificaFimLuta();
   }
 
   heroiDefende() {
     let log: LogAcoes;
-
-    if (this.marcadorEnvenenamento > 0) {
-      this.marcadorEnvenenamento--;
-      this.vidaAtualHeroi -= 15;
-    }
-
     let acaoVilao = this.vilaoRelizaAcao();
-    if (acaoVilao == 0) {
-      if (this.vilao.ataque - this.heroi.defesa > 0) {
-        this.vidaAtualHeroi -= this.vilao.ataque - this.heroi.defesa;
+    if(this.marcadorEscudo > 0){
+      this.marcadorEscudo--;
+    }
+    if(acaoVilao == 0){
+      if(this.vilao.ataque - (this.heroi.defesa*2) > 0){
+        this.vidaAtualHeroi -= (this.vilao.ataque - (this.heroi.defesa*2));
       }
       log = {
         acaoHeroi: 'Defendeu',
-        acaoVilao: 'Atacou',
+        acaoVilao: 'Atacou'
       };
-    } else if (acaoVilao == 1) {
+    }else if(acaoVilao == 1){
       log = {
         acaoHeroi: 'Defendeu',
-        acaoVilao: 'Defendeu',
+        acaoVilao: 'Defendeu'
       };
-    } else {
-
+    }else{
       log = {
         acaoHeroi: 'Defendeu',
-        acaoVilao: 'usou Ataque Especial',
+        acaoVilao: 'usou Ataque Especial'
       };
     }
-
     this.logAcoes.push(log);
     this.verificaFimLuta();
   }
 
+  verificaAtaque(){
+    if(this.marcadorEscudo==0){
+      return true
+    }
+    return false;
+  }
+
   vilaoRelizaAcao() {
-    if (this.vidaAtualVilao <= this.vilao.vida*0.3 && this.marcadorEnvenenamento == 0) {
+    if (this.vidaAtualVilao <= this.vilao.vida*0.2 && this.marcadorEscudo == 0) {
       // ataque epecial 
-      this.marcadorEnvenenamento = 4;
+      this.marcadorEscudo = 3;
       return -1;
     }else{
       //Vilão realiza ação normal
       const randomNumber = Math.floor(Math.random() * 2);
-      if (randomNumber === 0) {
+      if (randomNumber === 0 || this.marcadorEscudo > 0) {
         //vilão ataca
         return 0;
       } else {
@@ -181,13 +176,6 @@ export class Fase5Component implements OnInit {
         return 1;
       }
     }      
-  }
-
-  verificaAtaque(){
-    if(this.marcadorEnvenenamento==0){
-      return true
-    }
-    return false;
   }
   
   verificaFimLuta() {
