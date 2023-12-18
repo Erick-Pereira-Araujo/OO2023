@@ -26,6 +26,9 @@ import { Fase6Component } from './fase-6/fase-6.component';
     Fase5Component,
     Fase6Component,
     Fase7Component,
+    Fase8Component,
+    Fase9Component,
+    Fase10Component
   ],
   imports: [
     CommonModule,

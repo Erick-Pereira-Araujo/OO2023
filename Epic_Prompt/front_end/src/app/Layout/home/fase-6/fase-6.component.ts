@@ -214,7 +214,7 @@ export class Fase6Component implements OnInit {
         this.heroiController.levelUp(this.vilao.dropXP, this.heroi).subscribe(res => {
           this.heroi = res;
           this.router.navigateByUrl(`/home/${this.heroi.id}`);
-          this.snackbarService.openSnackBar('Parabéns, você ganhou sua batalha e ganhou expêriencia para avançar em sua jornada', 'Entendi')
+          this.snackbarService.openSnackBar('Parabéns, você subiu de nível, continue em sua jornada', 'Entendi')
         })
       }else{
         this.heroiController.ganhaXP(this.vilao.dropXP, this.heroi).subscribe(res => {

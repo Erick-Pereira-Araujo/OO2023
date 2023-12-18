@@ -69,7 +69,7 @@ export class Fase5Component implements OnInit {
   }
 
   carregaVilao(){
-    this.vilaoController.getVilao(4).subscribe(res => {
+    this.vilaoController.getVilao(5).subscribe(res => {
       this.vilao = res;
       this.vidaAtualVilao = this.vilao.vida;
       this.vidaMaximaVilao = this.vilao.vida;
@@ -196,7 +196,7 @@ export class Fase5Component implements OnInit {
         this.heroiController.levelUp(this.vilao.dropXP, this.heroi).subscribe(res => {
           this.heroi = res;
           this.router.navigateByUrl(`/home/${this.heroi.id}`);
-          this.snackbarService.openSnackBar('Parabéns, você ganhou sua batalha e ganhou expêriencia para avançar em sua jornada', 'Entendi')
+          this.snackbarService.openSnackBar('Parabéns, você subiu de nível, continue em sua jornada', 'Entendi')
         })
       }else{
         this.heroiController.ganhaXP(this.vilao.dropXP, this.heroi).subscribe(res => {

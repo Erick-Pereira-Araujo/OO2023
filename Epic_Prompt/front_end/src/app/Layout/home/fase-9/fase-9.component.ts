@@ -42,7 +42,7 @@ export class Fase9Component  implements OnInit{
     this.carregaVilao();
     this.calcularPorcentagemVida(1);
     this.calcularPorcentagemVida(2);
-    this.curaProfunda = 0;
+    this.curaProfunda = -1;
   }
 
   carregaJogador(){
@@ -85,13 +85,17 @@ export class Fase9Component  implements OnInit{
 
   heroiAtaca(){
     let log: LogAcoes;
-    let acaoVilao = this.vilaoRelizaAcao();
+    let ataqueTemp: number;
     if(this.curaProfunda > 0){
+      ataqueTemp = this.vilao.ataque*1.2;
       this.curaProfunda--;
+    }else{
+      ataqueTemp = this.vilao.ataque;
     }
+    let acaoVilao = this.vilaoRelizaAcao();
     if(acaoVilao == 0){
-      if(this.vilao.ataque - this.heroi.defesa > 0){
-        this.vidaAtualHeroi -= (this.vilao.ataque - this.heroi.defesa);
+      if(ataqueTemp - this.heroi.defesa > 0){
+        this.vidaAtualHeroi -= (ataqueTemp - this.heroi.defesa);
       }
       if(this.heroi.ataque - this.vilao.defesa > 0){
         this.vidaAtualVilao -= this.heroi.ataque - this.vilao.defesa;
@@ -123,13 +127,17 @@ export class Fase9Component  implements OnInit{
 
   heroiDefende(){
     let log: LogAcoes;
-    let acaoVilao = this.vilaoRelizaAcao();
+    let ataqueTemp: number;
     if(this.curaProfunda > 0){
+      ataqueTemp = this.vilao.ataque*1.2;
       this.curaProfunda--;
+    }else{
+      ataqueTemp = this.vilao.ataque;
     }
+    let acaoVilao = this.vilaoRelizaAcao();
     if(acaoVilao == 0){
-      if(this.vilao.ataque - (this.heroi.defesa*2) > 0){
-        this.vidaAtualHeroi -= (this.vilao.ataque - (this.heroi.defesa*2));
+      if(ataqueTemp - (this.heroi.defesa*2) > 0){
+        this.vidaAtualHeroi -= (ataqueTemp - (this.heroi.defesa*2));
       }
       log = {
         acaoHeroi: 'Defendeu',
@@ -151,10 +159,10 @@ export class Fase9Component  implements OnInit{
   }
 
   vilaoRelizaAcao(){
-    if(this.vidaAtualVilao <= this.vilao.vida * 0.35 && this.curaProfunda == 0){
+    if(this.vidaAtualVilao <= this.vilao.vida * 0.35 && this.curaProfunda == -1){
       //Vilão realiza ataque especial
-      this.vidaAtualVilao += this.vilao.vida*0.20;
-      this.curaProfunda = 4;
+      this.vidaAtualVilao += this.vilao.vida*0.50;
+      this.curaProfunda = 3;
       return -1;
 
     }else{
@@ -169,6 +177,13 @@ export class Fase9Component  implements OnInit{
       }
     }
   }
+
+  verificaAtaque(){
+    if(this.curaProfunda<=0){
+      return true
+    }
+    return false;
+  }
   
   verificaFimLuta(){
     if(this.vidaAtualVilao <= 0){
@@ -176,7 +191,7 @@ export class Fase9Component  implements OnInit{
         this.heroiController.levelUp(this.vilao.dropXP, this.heroi).subscribe(res => {
           this.heroi = res;
           this.router.navigateByUrl(`/home/${this.heroi.id}`);
-          this.snackbarService.openSnackBar('Parabéns, você ganhou sua batalha e ganhou expêriencia para avançar em sua jornada', 'Entendi')
+          this.snackbarService.openSnackBar('Parabéns, você subiu de nível, continue em sua jornada', 'Entendi')
         })
       }else{
         this.heroiController.ganhaXP(this.vilao.dropXP, this.heroi).subscribe(res => {

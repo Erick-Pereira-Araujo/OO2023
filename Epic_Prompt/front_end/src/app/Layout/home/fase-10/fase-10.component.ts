@@ -86,9 +86,6 @@ export class Fase10Component  implements OnInit{
   heroiAtaca(){
     let log: LogAcoes;
     let acaoVilao = this.vilaoRelizaAcao();
-    if(this.aniquilaçãoTotal > 0){
-      this.aniquilaçãoTotal--;
-    }
     if(acaoVilao == 0){
       if(this.vilao.ataque - this.heroi.defesa > 0){
         this.vidaAtualHeroi -= (this.vilao.ataque - this.heroi.defesa);
@@ -124,9 +121,6 @@ export class Fase10Component  implements OnInit{
   heroiDefende(){
     let log: LogAcoes;
     let acaoVilao = this.vilaoRelizaAcao();
-    if(this.aniquilaçãoTotal > 0){
-      this.aniquilaçãoTotal--;
-    }
     if(acaoVilao == 0){
       if(this.vilao.ataque - (this.heroi.defesa*2) > 0){
         this.vidaAtualHeroi -= (this.vilao.ataque - (this.heroi.defesa*2));
@@ -151,16 +145,16 @@ export class Fase10Component  implements OnInit{
   }
 
   vilaoRelizaAcao(){
-    if(this.vidaAtualVilao <= this.vilao.vida * 0.35 && this.aniquilaçãoTotal == 0){
+    if(this.vidaAtualVilao <= this.vilao.vida * 0.30 && this.aniquilaçãoTotal == 0){
       //Vilão realiza ataque especial
-      this.vidaAtualVilao += this.vilao.vida*0.20;
-      this.aniquilaçãoTotal = 4;
+      this.vidaAtualHeroi -= 80;
+      this.aniquilaçãoTotal = 1;
       return -1;
 
     }else{
       //Vilão realiza ação normal
       const randomNumber = Math.floor(Math.random() * 2);
-      if (randomNumber === 0 || this.aniquilaçãoTotal > 0) {
+      if (randomNumber === 0) {
         //vilão ataca
         return 0;
       } else {
@@ -176,7 +170,7 @@ export class Fase10Component  implements OnInit{
         this.heroiController.levelUp(this.vilao.dropXP, this.heroi).subscribe(res => {
           this.heroi = res;
           this.router.navigateByUrl(`/home/${this.heroi.id}`);
-          this.snackbarService.openSnackBar('Parabéns, você ganhou sua batalha e ganhou expêriencia para avançar em sua jornada', 'Entendi')
+          this.snackbarService.openSnackBar('Parabés, você derrotou todos os vilões da terra de Promt. O reino está em paz, mas você pode continuar enfrentando os vilões caso deseje.', 'Entendi')
         })
       }else{
         this.heroiController.ganhaXP(this.vilao.dropXP, this.heroi).subscribe(res => {

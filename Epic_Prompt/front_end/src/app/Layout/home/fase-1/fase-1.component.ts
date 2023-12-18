@@ -158,6 +158,7 @@ export class Fase1Component implements OnInit{
     this.verificaFimLuta();
   }
 
+  //Caso o heroi defenda, essa função gerencia os proximos passos, mesma lógica da de ataque basicamente.
   heroiDefende(){
     let log: LogAcoes;
     let acaoVilao = this.vilaoRelizaAcao();
@@ -187,6 +188,7 @@ export class Fase1Component implements OnInit{
     this.verificaFimLuta();
   }
 
+  //Aqui é quando o vilão realiza a ação
   vilaoRelizaAcao(){
     if(this.vidaAtualVilao <= this.vilao.vida * 0.3 && this.marcadorDanoReduzido == 0){
       //Vilão realiza ataque especial
@@ -206,6 +208,7 @@ export class Fase1Component implements OnInit{
     }
   }
 
+  //Verifica o ataque, para ver se o ataque do heroi foi reduzido
   verificaAtaque(){
     if(this.marcadorDanoReduzido==0){
       return true
@@ -213,15 +216,19 @@ export class Fase1Component implements OnInit{
     return false;
   }
   
+  //Verifica o fim da luta, para ver se a luta chegou ao fim
   verificaFimLuta(){
     if(this.vidaAtualVilao <= 0){
+      //Aqui caso o heroi vença
       if(this.heroi.xpAtual + this.vilao.dropXP >= this.heroi.barraXP){
+        //Se o drop de xp for suficiente para subir de nível ele chama função de upar
         this.heroiController.levelUp(this.vilao.dropXP, this.heroi).subscribe(res => {
           this.heroi = res;
           this.router.navigateByUrl(`/home/${this.heroi.id}`);
-          this.snackbarService.openSnackBar('Parabéns, você ganhou sua batalha e ganhou expêriencia para avançar em sua jornada', 'Entendi')
+          this.snackbarService.openSnackBar('Parabéns, você subiu de nível, continue em sua jornada', 'Entendi')
         })
       }else{
+        //se não ele apenas ganha experiência
         this.heroiController.ganhaXP(this.vilao.dropXP, this.heroi).subscribe(res => {
           this.heroi = res;
           this.router.navigateByUrl(`/home/${this.heroi.id}`);
@@ -229,6 +236,7 @@ export class Fase1Component implements OnInit{
         })
       }
     }
+    //Aqui se o heroi perder
     if(this.vidaAtualHeroi <= 0){
       this.router.navigateByUrl(`/home/${this.heroi.id}`);
       this.snackbarService.openSnackBar('Derrota, infelizmente você perdeu a sua batalha contra o vilão', 'Entendi')

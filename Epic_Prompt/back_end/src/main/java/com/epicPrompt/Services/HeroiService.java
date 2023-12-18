@@ -34,26 +34,27 @@ public class HeroiService {
 	}
 	
 	public Heroi levelUp(Heroi heroi, Integer dropXP){
-		heroi.setXpAtual(heroi.getXpAtual() + dropXP - heroi.getBarraXP());
-		heroi.setBarraXP(heroi.getBarraXP()+100);
-		
-		//Existe a possibilidade do heroi upar 2 níveis de uma vez, para isso temos esse if.
-		if(heroi.getXpAtual() >= heroi.getBarraXP()) {
-			//aqui é caso ele upe 2 níveis
-			heroi.setXpAtual(heroi.getXpAtual() - heroi.getBarraXP());
+		if(heroi.getNivel() < 10) {
+			heroi.setXpAtual(heroi.getXpAtual() + dropXP - heroi.getBarraXP());
 			heroi.setBarraXP(heroi.getBarraXP()+100);
-			heroi.setAtaque(heroi.getAtaque()+10);
-			heroi.setDefesa(heroi.getDefesa()+10);
-			heroi.setVida(heroi.getVida()+40);
-			heroi.setNivel(heroi.getNivel()+2);
-		}else {
-			//aqui é caso ele upe 1 nível
-			heroi.setAtaque(heroi.getAtaque()+5);
-			heroi.setDefesa(heroi.getDefesa()+5);
-			heroi.setVida(heroi.getVida()+20);
-			heroi.setNivel(heroi.getNivel()+1);
+			
+			//Existe a possibilidade do heroi upar 2 níveis de uma vez, para isso temos esse if.
+			if(heroi.getXpAtual() >= heroi.getBarraXP()) {
+				//aqui é caso ele upe 2 níveis
+				heroi.setXpAtual(heroi.getXpAtual() - heroi.getBarraXP());
+				heroi.setBarraXP(heroi.getBarraXP()+100);
+				heroi.setAtaque(heroi.getAtaque()+10);
+				heroi.setDefesa(heroi.getDefesa()+10);
+				heroi.setVida(heroi.getVida()+40);
+				heroi.setNivel(heroi.getNivel()+2);
+			}else {
+				//aqui é caso ele upe 1 nível
+				heroi.setAtaque(heroi.getAtaque()+5);
+				heroi.setDefesa(heroi.getDefesa()+5);
+				heroi.setVida(heroi.getVida()+20);
+				heroi.setNivel(heroi.getNivel()+1);
+			}
 		}
-		
 		//atualiza o heroi no banco e retorna esse heroi.
 		return heroiRepository.save(heroi);
 	}
