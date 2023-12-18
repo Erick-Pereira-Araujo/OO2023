@@ -1,14 +1,13 @@
 <div class="container" style="display: flex; flex-direction: column; align-items: center;">
-    <h1>Vilão Tempestade Elétrica</h1>
-    
+    <h1>Vilão da Tempestade Elétrica</h1>
     <div class="row">
         <div class="col-6">
             <div class="barraVida">
                 <div class="valorVida" [style.width.%]="calcularPorcentagemVida(1)">
-                    Vida: {{ vidaAtualHeroi }} / {{ vidaMaximaHeroi }}
+                    Vida: {{ vidaAtualHeroi?.toFixed(2)  }} / {{ vidaMaximaHeroi }}
                 </div>
             </div>
-            <img width="50%" style="margin-bottom: 20px;" src="./imagens/heroi.png" alt="Herói">
+            <img width="75%" style="margin-bottom: 20px; margin-top: 20px;" src="../../../../assets/Images/Cavaleiro.png" alt="img">
             <table class="table">
                 <thead>
                     <tr>
@@ -17,13 +16,9 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <tr *ngIf="verificaAtaque()">
+                    <tr>
                         <th scope="row">Ataque</th>
                         <td>{{heroi?.ataque}}</td>
-                    </tr>
-                    <tr *ngIf="!verificaAtaque()">
-                        <th scope="row">Ataque</th>
-                        <td style="color: red;">{{heroi?.ataque*0.8}} dano reduzido</td>
                     </tr>
                     <tr>
                         <th scope="row">Defesa</th>
@@ -35,10 +30,10 @@
         <div class="col-6">
             <div class="barraVida">
                 <div class="valorVida" [style.width.%]="calcularPorcentagemVida(2)">
-                    Vida: {{ vidaAtualVilao }} / {{ vidaMaximaVilao }}
+                    Vida: {{ vidaAtualVilao?.toFixed(2) }} / {{ vidaMaximaVilao }}
                 </div>
             </div>
-            <img width="40%" style="margin-bottom: 20px;" src="./imagens/vilão.png" alt="Vilão do Veneno Oculto">
+            <img width="75%" style="margin-bottom: 20px; margin-top: 20px;" src="../../../../assets/Images/Cavaleiro.png" alt="img">
             <table class="table">
                 <thead>
                     <tr>
@@ -57,13 +52,12 @@
                     </tr>
                     <tr>
                         <th scope="row">Ataque Especial</th>
-                        <td>{{vilao?.ataqueEspecial}}</td>
+                        <td>Causa 40 pontos de dano ao herói e tem 25% de chance de "Eletrocutar" o herói por 1 turno, impedindo-o de agir</td>
                     </tr>
                 </tbody>
             </table>
         </div>
     </div>
-    
     <div class="row">
         <div class="col-6">
             <button type="button" (click)="heroiAtaca()" class="botoes">Atacar</button>
@@ -72,7 +66,6 @@
             <button type="button" (click)="heroiDefende()" class="botoes">Defender</button>
         </div>
     </div>
-    
     <ul>
         <li *ngFor="let log of logAcoes; let i = index">Turno: {{i+1}}, Você {{log.acaoHeroi}}, o Vilão {{log.acaoVilao}}</li>
     </ul>

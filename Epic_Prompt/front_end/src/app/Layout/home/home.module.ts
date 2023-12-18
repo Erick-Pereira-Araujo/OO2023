@@ -9,6 +9,7 @@ import { Fase3Component } from './fase-3/fase-3.component';
 import { Fase4Component } from './fase-4/fase-4.component';
 import { Fase5Component } from './fase-5/fase-5.component';
 import { Fase7Component } from './fase-7/fase-7.component';
+import { Fase6Component } from './fase-6/fase-6.component';
 
 
 
@@ -20,7 +21,8 @@ import { Fase7Component } from './fase-7/fase-7.component';
     Fase3Component,
     Fase4Component,
     Fase5Component,
-    Fase7Component
+    Fase6Component,
+    Fase7Component,
   ],
   imports: [
     CommonModule,

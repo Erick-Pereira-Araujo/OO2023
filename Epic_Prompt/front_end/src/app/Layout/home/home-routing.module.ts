@@ -6,6 +6,7 @@ import { Fase2Component } from './fase-2/fase-2.component';
 import { Fase3Component } from './fase-3/fase-3.component';
 import { Fase4Component } from './fase-4/fase-4.component';
 import { Fase5Component } from './fase-5/fase-5.component';
+import { Fase6Component } from './fase-6/fase-6.component';
 import { Fase7Component } from './fase-7/fase-7.component';
 
 
@@ -16,6 +17,7 @@ const routes: Routes = [
   {path : 'fase-3', component: Fase3Component},
   {path : 'fase-4', component: Fase4Component},
   {path : 'fase-5', component: Fase5Component},
+  {path : 'fase-6', component: Fase6Component},
   {path : 'fase-7', component: Fase7Component},
 
 ];
