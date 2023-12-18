@@ -1,13 +1,13 @@
 <div class="container" style="display: flex; flex-direction: column; align-items: center;">
-    <h1>Vilão do Escudo Divino</h1>
+    <h1>Vilão do Armadura de Gelo</h1>
     <div class="row">
         <div class="col-6">
             <div class="barraVida">
                 <div class="valorVida" [style.width.%]="calcularPorcentagemVida(1)">
-                    Vida: {{ vidaAtualHeroi?.toFixed(2)  }} / {{ vidaMaximaHeroi }}
+                    Vida: {{ vidaAtualHeroi?.toFixed(2) }} / {{ vidaMaximaHeroi }}
                 </div>
             </div>
-            <img width="75%" style="margin-bottom: 20px; margin-top: 20px;" src="../../../assets/Images/Cavaleiro.png" alt="img">
+            <img width="75%" style="margin-bottom: 20px; margin-top: 20px;" src="../../../../assets/Images/Cavaleiro.png" alt="img">
             <table class="table">
                 <thead>
                     <tr>
@@ -30,14 +30,11 @@
         <div class="col-6">
             <div class="barraVida">
                 <div class="valorVida" [style.width.%]="calcularPorcentagemVida(2)">
-                    Vida: {{ vidaAtualVilao?.toFixed(2)  }} / {{ vidaMaximaVilao }}
-                </div>
-                <div *ngIf="!verificaAtaque()" class="valorVidaEscudo" [style.width.%]="calcularPorcentagemVida(2)">
-                    Vida: {{ vidaAtualVilao?.toFixed(2)  }} / {{ vidaMaximaVilao }}<br>
-                    Sob efeito de Escudo Divino
+                    Vida: {{ vidaAtualVilao?.toFixed(2) }} / {{ vidaMaximaVilao }}
                 </div>
             </div>
-            <img width="75%" style="margin-bottom: 20px; margin-top: 20px;" src="../../../assets/Images/Cavaleiro.png" alt="img">
+            <p *ngIf="!verificaAtaque()" style="margin: 0;">Sob efeito de Armadura de Gelo</p>
+            <img width="75%" style="margin-bottom: 20px; margin-top: 20px;" src="../../../../assets/Images/Cavaleiro.png" alt="img">
             <table class="table">
                 <thead>
                     <tr>
@@ -56,7 +53,7 @@
                     </tr>
                     <tr>
                         <th scope="row">Ataque Especial</th>
-                        <td>Cria um escudo que reduz em 50% o dano recebido pelo vilão durante 2 turnos</td>
+                        <td>Reduz em 70% o dano recebido pelo vilão durante 3 turnos</td>
                     </tr>
                 </tbody>
             </table>

@@ -4,7 +4,7 @@
         <div class="col-6">
             <div class="barraVida">
                 <div class="valorVida" [style.width.%]="calcularPorcentagemVida(1)">
-                    Vida: {{ vidaAtualHeroi }} / {{ vidaMaximaHeroi }}
+                    Vida: {{ vidaAtualHeroi?.toFixed(2)  }} / {{ vidaMaximaHeroi }}
                 </div>
                 <div *ngIf="!verificaAtaque()" class="valorVidaVermelha" [style.width.%]="calcularPorcentagemVida(1)">
                     Vida: {{ vidaAtualHeroi }} / {{ vidaMaximaHeroi }}<br>
@@ -34,7 +34,7 @@
         <div class="col-6">
             <div class="barraVida">
                 <div class="valorVida" [style.width.%]="calcularPorcentagemVida(2)">
-                    Vida: {{ vidaAtualVilao }} / {{ vidaMaximaVilao }}
+                    Vida: {{ vidaAtualVilao?.toFixed(2)  }} / {{ vidaMaximaVilao }}
                 </div>
             </div>
             <img width="75%" style="margin-bottom: 20px; margin-top: 20px;" src="../../../assets/Images/Cavaleiro.png" alt="img">

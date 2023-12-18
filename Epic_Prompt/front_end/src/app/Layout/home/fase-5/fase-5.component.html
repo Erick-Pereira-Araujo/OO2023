@@ -1,13 +1,17 @@
 <div class="container" style="display: flex; flex-direction: column; align-items: center;">
-    <h1>Vilão do Escudo Divino</h1>
+    <h1>Vilão do Veneno Oculto</h1>
     <div class="row">
         <div class="col-6">
             <div class="barraVida">
                 <div class="valorVida" [style.width.%]="calcularPorcentagemVida(1)">
                     Vida: {{ vidaAtualHeroi?.toFixed(2)  }} / {{ vidaMaximaHeroi }}
                 </div>
+                <div *ngIf="!verificaAtaque()" class="valorVidaRoxa" [style.width.%]="calcularPorcentagemVida(1)">
+                    Vida: {{ vidaAtualHeroi?.toFixed(2)  }} / {{ vidaMaximaHeroi }}<br>
+                    Sob efeito de Envenenamento
+                </div>
             </div>
-            <img width="75%" style="margin-bottom: 20px; margin-top: 20px;" src="../../../assets/Images/Cavaleiro.png" alt="img">
+            <img width="75%" style="margin-bottom: 20px; margin-top: 20px;" src="../../../../assets/Images/Cavaleiro.png" alt="img">
             <table class="table">
                 <thead>
                     <tr>
@@ -30,14 +34,10 @@
         <div class="col-6">
             <div class="barraVida">
                 <div class="valorVida" [style.width.%]="calcularPorcentagemVida(2)">
-                    Vida: {{ vidaAtualVilao?.toFixed(2)  }} / {{ vidaMaximaVilao }}
-                </div>
-                <div *ngIf="!verificaAtaque()" class="valorVidaEscudo" [style.width.%]="calcularPorcentagemVida(2)">
-                    Vida: {{ vidaAtualVilao?.toFixed(2)  }} / {{ vidaMaximaVilao }}<br>
-                    Sob efeito de Escudo Divino
+                    Vida: {{ vidaAtualVilao?.toFixed(2) }} / {{ vidaMaximaVilao }}
                 </div>
             </div>
-            <img width="75%" style="margin-bottom: 20px; margin-top: 20px;" src="../../../assets/Images/Cavaleiro.png" alt="img">
+            <img width="75%" style="margin-bottom: 20px; margin-top: 20px;" src="../../../../assets/Images/Cavaleiro.png" alt="img">
             <table class="table">
                 <thead>
                     <tr>
@@ -56,7 +56,7 @@
                     </tr>
                     <tr>
                         <th scope="row">Ataque Especial</th>
-                        <td>Cria um escudo que reduz em 50% o dano recebido pelo vilão durante 2 turnos</td>
+                        <td>Aplica um efeito de "Envenenamento" no herói, causando 15 pontos de dano por turno durante 4 turnos</td>
                     </tr>
                 </tbody>
             </table>

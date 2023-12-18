@@ -1,13 +1,14 @@
 <div class="container" style="display: flex; flex-direction: column; align-items: center;">
-    <h1>Vilão do Escudo Divino</h1>
+    <h1>Vilão Tempestade Elétrica</h1>
+    
     <div class="row">
         <div class="col-6">
             <div class="barraVida">
                 <div class="valorVida" [style.width.%]="calcularPorcentagemVida(1)">
-                    Vida: {{ vidaAtualHeroi?.toFixed(2)  }} / {{ vidaMaximaHeroi }}
+                    Vida: {{ vidaAtualHeroi }} / {{ vidaMaximaHeroi }}
                 </div>
             </div>
-            <img width="75%" style="margin-bottom: 20px; margin-top: 20px;" src="../../../assets/Images/Cavaleiro.png" alt="img">
+            <img width="50%" style="margin-bottom: 20px;" src="./imagens/heroi.png" alt="Herói">
             <table class="table">
                 <thead>
                     <tr>
@@ -16,9 +17,13 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <tr>
+                    <tr *ngIf="verificaAtaque()">
                         <th scope="row">Ataque</th>
                         <td>{{heroi?.ataque}}</td>
+                    </tr>
+                    <tr *ngIf="!verificaAtaque()">
+                        <th scope="row">Ataque</th>
+                        <td style="color: red;">{{heroi?.ataque*0.8}} dano reduzido</td>
                     </tr>
                     <tr>
                         <th scope="row">Defesa</th>
@@ -30,14 +35,10 @@
         <div class="col-6">
             <div class="barraVida">
                 <div class="valorVida" [style.width.%]="calcularPorcentagemVida(2)">
-                    Vida: {{ vidaAtualVilao?.toFixed(2)  }} / {{ vidaMaximaVilao }}
-                </div>
-                <div *ngIf="!verificaAtaque()" class="valorVidaEscudo" [style.width.%]="calcularPorcentagemVida(2)">
-                    Vida: {{ vidaAtualVilao?.toFixed(2)  }} / {{ vidaMaximaVilao }}<br>
-                    Sob efeito de Escudo Divino
+                    Vida: {{ vidaAtualVilao }} / {{ vidaMaximaVilao }}
                 </div>
             </div>
-            <img width="75%" style="margin-bottom: 20px; margin-top: 20px;" src="../../../assets/Images/Cavaleiro.png" alt="img">
+            <img width="40%" style="margin-bottom: 20px;" src="./imagens/vilão.png" alt="Vilão do Veneno Oculto">
             <table class="table">
                 <thead>
                     <tr>
@@ -56,12 +57,13 @@
                     </tr>
                     <tr>
                         <th scope="row">Ataque Especial</th>
-                        <td>Cria um escudo que reduz em 50% o dano recebido pelo vilão durante 2 turnos</td>
+                        <td>{{vilao?.ataqueEspecial}}</td>
                     </tr>
                 </tbody>
             </table>
         </div>
     </div>
+    
     <div class="row">
         <div class="col-6">
             <button type="button" (click)="heroiAtaca()" class="botoes">Atacar</button>
@@ -70,6 +72,7 @@
             <button type="button" (click)="heroiDefende()" class="botoes">Defender</button>
         </div>
     </div>
+    
     <ul>
         <li *ngFor="let log of logAcoes; let i = index">Turno: {{i+1}}, Você {{log.acaoHeroi}}, o Vilão {{log.acaoVilao}}</li>
     </ul>

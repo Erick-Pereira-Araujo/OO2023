@@ -8,6 +8,7 @@ import { NavigationEnd, Router } from '@angular/router';
 })
 export class LayoutComponent implements OnInit {
 
+  //serve apenas para esconder o conteúdo html de layout após mudar de página
   mostrarConteudo: boolean = true;
 
   constructor(private router: Router) {

@@ -26,6 +26,8 @@ public class VilaoService {
 	
 	public void iniciaBanco() {
 		Vilao vilao1 =  new Vilao();
+		
+		Vilao vilao1 =  new Vilao();
 		vilao1.setId(1);
 		vilao1.setAtaque(12);
 		vilao1.setDefesa(6);
